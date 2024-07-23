@@ -3,4 +3,5 @@ estate.access_real_estate,access_real_estate,estate.model_real_estate,base.group
 access_estate_owner,access_estate_owner,model_estate_owner,base.group_user,1,1,1,1
 access_estate_agents,access_estate_agents,model_agents,base.group_user,1,1,1,1
 access_estate_offer,access_estate_offers,model_offer,base.group_user,1,1,1,1
+access_estate_tags,access_estate_tagss,model_tags,base.group_user,1,1,1,1
 estate.access_real_estate_manager,access_real_estate_manager,estate.model_real_estate,estate.estate_manger,1,1,1,1

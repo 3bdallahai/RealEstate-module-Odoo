@@ -5,19 +5,22 @@ from odoo.exceptions import UserError
 class Offer(models.Model):
     _name = 'offer'
     _description = 'Offer'
+    _sql_constraints = [
+        ("amount_positive","CHECK(amount>0)","excepected price should be positive"),   
+                        ]
 
 
     amount =fields.Float(required=True)
-    create_date=fields.Date(required=True)
+    create_date=fields.Date(required=True, default=fields.Datetime.now)
     desired_estate_id = fields.Many2one("real.estate")
-    validity =fields.Integer(required=True)
+    validity =fields.Integer(required=True, default= 7)
     deadline_date   = fields.Date(compute="_compute_deadline_date"  )
     status = fields.Selection([("accepted", "accepted"),("rejected", "rejected")])
 
     @api.depends('create_date', 'validity')
     def _compute_deadline_date(self):
         for record in self:
-            if record.create_date:
+            if record.create_date and record.validity is not None:
                 create_date = fields.Date.from_string(record.create_date)
                 record.deadline_date = create_date + timedelta(days=record.validity)
 

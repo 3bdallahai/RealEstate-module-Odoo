@@ -14,6 +14,7 @@
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\estate_menus_views.xml",
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\estate_agents_view.xml",
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\offer_view.xml",
+        "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\Tags_view.xml",
         
 
     ] ,

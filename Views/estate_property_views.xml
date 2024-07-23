@@ -10,6 +10,9 @@
                 <field name="postcode"/>
                 <filter name="filter_state_name" string="New" domain="[('state','=','new')]"/>
                 <filter name="group_by_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
+                <field name="tags_ids"/>
+                <field name="tags_ids" string="Tags" widget="many2many_tags"/>
+                <filter string="Tags" name="tags_filter" domain="[('tags_ids', '!=', False)]"/>
 
             </search> 
         </field>      
@@ -28,6 +31,7 @@
                         </div>
                         <h1 class="mb32">
                             <field name="name" class="mb32"/>
+                            <field name="tags_ids" widget="many2many_tags"/>
                         </h1>
                         <field name="active" invisible="1"/>
                     </div>                    
@@ -50,9 +54,10 @@
                         <page string="prices">
                             <group>
                                 <field name="best_offer"/>
-                                <field name="excepected_price"/>
+                                <field name="expected_price"/>
                                 <field name="selling_price"/>
                                 <field name="offers_ids"/>
+                                
                             </group>
                         </page>
                     </notebook>
@@ -70,7 +75,7 @@
                 <field name="name"/>
                 <field name="date_available"/>
                 <field name="state"/>
-
+                <field name="tags_ids"/>
             </tree>
         </field>
     </record>
