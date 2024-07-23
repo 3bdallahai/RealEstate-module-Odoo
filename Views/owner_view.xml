@@ -1,0 +1,44 @@
+<odoo>
+    <!-- Form view -->
+    <record id="owner_form_view" model="ir.ui.view">
+        <field name="name">estate.owner.view.form</field>
+        <field name="model">estate.owner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone_number"/>
+                        <field name="address"/>
+                        <field name="status"/>
+
+                    </group>
+                    <group>
+                        <field name="estate_ids"/>                    
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="owner_tree_view" model="ir.ui.view">
+        <field name="name">estate.owner.view.tree</field>
+        <field name="model">estate.owner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone_number"/>
+                <field name="address"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_owner_action" model="ir.actions.act_window">
+        <field name="name">owner Action</field>
+        <field name="res_model">estate.owner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

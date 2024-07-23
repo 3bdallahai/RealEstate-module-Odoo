@@ -1,0 +1,14 @@
+<odoo>
+    <menuitem id="root_level" name="Real Estate"/>
+    <menuitem id="owner_l" name="Owner" parent="root_level" action="action_owner_action"/>
+    <menuitem id="second_level" name="Properties" parent="root_level" action="test_record"/>
+    <menuitem id="agents_l" name="Agents" parent="root_level" action="agents_action"/>
+    <menuitem id="offers_l" name="Offers" parent="root_level" action="offer_action"/>
+    
+
+
+   
+
+
+</odoo>
+

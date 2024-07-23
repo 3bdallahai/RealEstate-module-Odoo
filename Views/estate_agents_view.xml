@@ -1,0 +1,41 @@
+<odoo>
+    <!-- Form view -->
+    <record id="agent_form_view" model="ir.ui.view">
+        <field name="name">estate.agent.view.form</field>
+        <field name="model">agents</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="age"/>
+                        <field name="rating"/>
+
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="agent_tree_view" model="ir.ui.view">
+        <field name="name">estate.agent.view.tree</field>
+        <field name="model">agents</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="rating"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="agents_action" model="ir.actions.act_window">
+        <field name="name">agent Action</field>
+        <field name="res_model">agents</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
