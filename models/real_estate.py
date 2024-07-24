@@ -7,7 +7,9 @@ class RealEstate(models.Model):
     _sql_constraints = [
         ("excepected_price_positive","CHECK(excepected_price>0)","excepected price should be positive"),   
                         ]
+    _order = "sequence desc"
 
+    sequence = fields.Integer(defualt=1)
     active = fields.Boolean(default=True, invisble=True)
     name= fields.Char(required=True)
     state =fields.Selection(
@@ -16,7 +18,7 @@ class RealEstate(models.Model):
         ("received","Offer Received"),
         ("accepted","Offer Accepted"),
         ("sold","Sold"),
-        ("cacelled","Cancelled"),
+        ("cancelled","Cancelled"),
         ],
         required=True,
         default="new",        
@@ -89,3 +91,11 @@ class RealEstate(models.Model):
         for estate in self:
             if estate.selling_price < estate.expected_price *0.95 and estate.selling_price != 0.00 :
                 raise ValidationError(_(f"selling price should be more than 95% of the excepected price "))
+            
+    def sold_action(self):
+        for estate in self:
+            estate.state ='sold'
+
+    def cancel_action(self):
+        for estate in self:
+            estate.state = 'cancelled'          

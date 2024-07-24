@@ -8,3 +8,4 @@ class Tags(models.Model):
     ]
 
     name = fields.Char(string="Tag Name", required=True)
+    color =fields.Char()

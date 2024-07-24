@@ -13,7 +13,8 @@
                         <field name="deadline_date"/>
                         <field name="validity"/>
                         <field name="status"/>
-                        <button icon="fa-check" type="object" name="accept_action"/>
+                        <button icon="fa-check" invisible="status in ('accepted', 'rejected')" type="object" name="accept_action"/>
+                        <button icon="fa-times" invisible="status in ('accepted', 'rejected')" type="object" name="refuse_action"/>
                     </group>
                 </sheet>
             </form>
@@ -25,13 +26,15 @@
         <field name="name">offer.view.tree</field>
         <field name="model">offer</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="offers" decoration-danger="status== 'rejected'" decoration-success="status== 'accepted'" >
+                <field name="status" optional="False" />
                 <field name="desired_estate_id"/>              
-                <field name="deadline_date"/>
+                <field name="deadline_date" />
                 <field name="create_date"/>
                 <field name="amount"/>
-                <field name="validity"/>
-                <button icon="fa-check" type="object" name="accept_action"/>
+                <field name="validity" optional="False"/>
+                <button icon="fa-check" invisible="status in ('accepted', 'rejected')" type="object" name="accept_action"/>
+                <button icon="fa-times" invisible="status in ('accepted', 'rejected')" type="object" name="refuse_action"/>
 
             </tree>
         </field>

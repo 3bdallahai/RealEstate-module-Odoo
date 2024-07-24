@@ -6,9 +6,12 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="state" invisible="1"/>
+                <field name="state" />
                 <field name="postcode"/>
+                <!-- filter by state -->
                 <filter name="filter_state_name" string="New" domain="[('state','=','new')]"/>
+                <filter name="filter_state_name" string="Sold" domain="[('state','=','sold')]"/>                
+                <filter name="filter_state_name" string="Cancelled" domain="[('state','=','cancelled')]"/>
                 <filter name="group_by_postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
                 <field name="tags_ids"/>
                 <field name="tags_ids" string="Tags" widget="many2many_tags"/>
@@ -25,13 +28,20 @@
         <field name="arch" type="xml">
             <form>
                <sheet>
+                    <group>
+                        <button name="sold_action" invisible="state in ('sold', 'cancelled')" type="object" class= "btn btn-primary" string="Sold"/>
+                        <button name="cancel_action" invisible="state in ('sold', 'cancelled')" type="object"  string="Cancel"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="new,sold,cancelled "/>     
+                    </group>    
                     <div class="oe_title">
                         <div class="oe_edit_only">
                             <label for="name"/>
                         </div>
                         <h1 class="mb32">
                             <field name="name" class="mb32"/>
-                            <field name="tags_ids" widget="many2many_tags"/>
+                            <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            
                         </h1>
                         <field name="active" invisible="1"/>
                     </div>                    
@@ -44,8 +54,8 @@
                         <page string="Description">
                             <group>
                             <field name="garden"/> 
-                            <field name="garden_orientation"/> 
-                            <field name="garden_area"/>
+                            <field name="garden_orientation" widget="radio" invisible="not garden" /> 
+                            <field name="garden_area" invisible="not garden"/>
                             <field name="garage"/> 
                             <field name="living_area"/> 
                             <field name="total_area"/> 
@@ -56,7 +66,13 @@
                                 <field name="best_offer"/>
                                 <field name="expected_price"/>
                                 <field name="selling_price"/>
-                                <field name="offers_ids"/>
+                                <field name="offers_ids">
+                                    <!-- <tree>
+                                        <field name="amount"/>
+                                        <field name="status"/>
+                                        <field name="deadline_date"/>
+                                    </tree> -->
+                                </field>
                                 
                             </group>
                         </page>
@@ -71,7 +87,8 @@
         <field name="name">real.estate.view.tree</field>
         <field name="model">real.estate</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="state== 'sold'" decoration-bf="state== 'sold'" decoration-danger="state== 'cancelled'" decoration-info="state== 'received'" >
+                <field name="sequence" widget="handle"/>        
                 <field name="name"/>
                 <field name="date_available"/>
                 <field name="state"/>

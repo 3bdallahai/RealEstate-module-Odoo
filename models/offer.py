@@ -8,6 +8,7 @@ class Offer(models.Model):
     _sql_constraints = [
         ("amount_positive","CHECK(amount>0)","excepected price should be positive"),   
                         ]
+    _order="amount desc"
 
 
     amount =fields.Float(required=True)
@@ -33,3 +34,17 @@ class Offer(models.Model):
         self.desired_estate_id.selling_price= self.amount             
 
                
+    def refuse_action(self):
+        self.ensure_one()
+        self.status= "rejected"
+
+    @api.model
+    def create(self, vals):
+        # Create the offer record
+        offer = super(Offer, self).create(vals)
+
+        # Update the property state to 'received'
+        if offer.desired_estate_id:
+            offer.desired_estate_id.state = 'received'
+
+        return offer    
