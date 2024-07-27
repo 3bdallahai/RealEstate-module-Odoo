@@ -3,7 +3,7 @@
     "summary" : "test module",
     "version" : "17.0.0.0",
     "license" : "OEEL-1",
-    "depends" : ["crm"],
+    "depends" : ["crm","mail"],
     "data"    : [
         #Security
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\security\sres_groups.xml",
@@ -15,6 +15,7 @@
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\estate_agents_view.xml",
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\offer_view.xml",
         "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\Tags_view.xml",
+        "D:\Odoo\odoo-17.0\odoo\custom_addons\estate\Views\Type.xml",
         
 
     ] ,

@@ -7,7 +7,7 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="create_date"/>
+                        <field name="create_date" />
                         <field name="amount"/>
                         <field name="desired_estate_id"/>
                         <field name="deadline_date"/>
@@ -26,7 +26,8 @@
         <field name="name">offer.view.tree</field>
         <field name="model">offer</field>
         <field name="arch" type="xml">
-            <tree string="offers" decoration-danger="status== 'rejected'" decoration-success="status== 'accepted'" >
+            <tree string="offers" decoration-danger="status== 'rejected'" decoration-success="status== 'accepted'"  >
+            <!-- desired_estate_id.state in ('sold' , 'cancelled') -->
                 <field name="status" optional="False" />
                 <field name="desired_estate_id"/>              
                 <field name="deadline_date" />

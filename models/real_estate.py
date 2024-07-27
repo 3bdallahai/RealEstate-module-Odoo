@@ -3,11 +3,12 @@ from odoo.exceptions import ValidationError
 
 class RealEstate(models.Model):
     _name = 'real.estate'
-    _description = 'Test model'
+    _description = 'Property'
     _sql_constraints = [
         ("excepected_price_positive","CHECK(excepected_price>0)","excepected price should be positive"),   
                         ]
     _order = "sequence desc"
+    _inherit =['mail.activity.mixin','mail.thread']
 
     sequence = fields.Integer(defualt=1)
     active = fields.Boolean(default=True, invisble=True)
@@ -31,11 +32,12 @@ class RealEstate(models.Model):
         return fields.Date.today()
     
     owner_id = fields.Many2one('estate.owner') 
-    description= fields.Char(string="description")
+    type_id = fields.Many2one('property.type') 
+    description= fields.Char(string="description",tracking=1)
     date_available= fields.Date(default=_defualt_date)
     expected_price = fields.Float(string="Expected Price")
     best_offer = fields.Float(compute='_compute_max_offer')    
-    selling_price = fields.Float(default=0.00)
+    selling_price = fields.Float(default=0.00, readonly=True)
     living_area = fields.Integer(string="Living Area (sqm)")
     garage = fields.Boolean()
     garden = fields.Boolean()
@@ -99,3 +101,10 @@ class RealEstate(models.Model):
     def cancel_action(self):
         for estate in self:
             estate.state = 'cancelled'          
+
+
+    def unlink(self):
+        for record in self:
+            if record.state not in ('new', 'cancelled'):
+                raise ValidationError(_('You cannot delete an estate that is not in state New or Cancelled.'))            
+        return super(RealEstate,self).unlink()    

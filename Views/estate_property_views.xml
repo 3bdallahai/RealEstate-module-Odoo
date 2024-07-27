@@ -5,10 +5,11 @@
         <field name="model">real.estate</field> 
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
+                <field name="name" filter_domain="[('name','ilike',self)]"/>
                 <field name="state" />
                 <field name="postcode"/>
                 <!-- filter by state -->
+                <filter name="available" string="Avalible" domain="['|', ('state','=','new') , ('state','=','received') ]"/>
                 <filter name="filter_state_name" string="New" domain="[('state','=','new')]"/>
                 <filter name="filter_state_name" string="Sold" domain="[('state','=','sold')]"/>                
                 <filter name="filter_state_name" string="Cancelled" domain="[('state','=','cancelled')]"/>
@@ -37,16 +38,19 @@
                     <div class="oe_title">
                         <div class="oe_edit_only">
                             <label for="name"/>
+                            <field name="name" class="mb32"/>
                         </div>
                         <h1 class="mb32">
-                            <field name="name" class="mb32"/>
+                            <field name="description"/>
+                            <label for="tags_ids"/>
                             <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                            
+                                                        
                         </h1>
                         <field name="active" invisible="1"/>
                     </div>                    
                     <group>
-                         <field name="owner_id"/>                    
+                         <field name="type_id" string="Property type"/> 
+                         <field name="owner_id"/> 
                          <field name="date_available"/>
                          <field name="postcode"/>
                     </group>
@@ -78,6 +82,11 @@
                         </page>
                     </notebook>
                </sheet>
+               <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+               </div>
             </form> 
         </field>      
     </record>
@@ -101,6 +110,7 @@
         <field name="name">Real Estate</field>
         <field name="res_model">real.estate</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_available': True}</field>
     </record>
 
 </odoo>

@@ -42,9 +42,10 @@ class Offer(models.Model):
     def create(self, vals):
         # Create the offer record
         offer = super(Offer, self).create(vals)
-
         # Update the property state to 'received'
         if offer.desired_estate_id:
             offer.desired_estate_id.state = 'received'
 
         return offer    
+
+ 

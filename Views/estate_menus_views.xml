@@ -6,6 +6,7 @@
     <menuitem id="offers_l" name="Offers" parent="root_level" action="offer_action"/>
     <menuitem id="settings_level" name="Settings" parent="root_level"/>
     <menuitem id="tags_level" name="Tags" parent="settings_level" action="tag_action"/> 
+    <menuitem id="type_level" name="Types" parent="settings_level" action="type_action"/> 
     
 
 
