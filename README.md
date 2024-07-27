@@ -2,4 +2,4 @@
 
 My first odoo module. learning the basics of odoo development. 
 
-This repo includes the first models I have created: real estate (property), owners, agents and offers.
+This repo includes my first models: real estate (property), owners, agents, tags, property type, and offers.
